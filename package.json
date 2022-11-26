@@ -1,0 +1,15 @@
+{
+  "name": "automationsy",
+  "version": "1.0.0",
+  "description": "test automation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "Charles Lana",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^19.3.0"
+  },
+  "type": "module"
+}
