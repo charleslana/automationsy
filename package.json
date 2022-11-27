@@ -4,12 +4,21 @@
   "description": "test automation",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
+    "build": "tsc",
+    "start": "npm run build && node dist/test/index.js"
   },
   "author": "Charles Lana",
   "license": "ISC",
   "dependencies": {
     "puppeteer": "^19.3.0"
   },
-  "type": "module"
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1"
+  }
 }
