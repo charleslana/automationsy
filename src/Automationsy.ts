@@ -3,6 +3,10 @@ import IError from './IError';
 import puppeteer, { Browser, ElementHandle, KeyInput, Page } from 'puppeteer';
 
 export default class AutomationSy {
+  private constructor() {
+    //
+  }
+
   private static page = new Page();
   private static browser = new Browser();
   private static headless = false;
