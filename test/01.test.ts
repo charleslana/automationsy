@@ -19,6 +19,7 @@ import AutomationSy from '../src/AutomationSy';
   );
   console.log('isDisabled:', isDisabled);
   await AutomationSy.clear('#clearMe');
+  await AutomationSy.fill('#clearMe', 'Fill');
   await AutomationSy.sleep(1000);
   await AutomationSy.dispose();
 })();

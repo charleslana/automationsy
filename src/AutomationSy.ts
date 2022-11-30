@@ -114,6 +114,53 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  static async clickPosition(x: number, y: number): Promise<void> {
+    try {
+      await this.page.mouse.click(x, y, { button: 'left' });
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async doubleClick(locator: string): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await (elements[0] as ElementHandle<Element>).click({ clickCount: 2 });
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async fill(locator: string, text: string): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await elements[0].evaluate(
+        (selector, text) => ((selector as HTMLInputElement).value = text),
+        text
+      );
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async autoScroll(distance = 100, delay = 100) {
+    while (
+      await this.page.evaluate(
+        () =>
+          (document.scrollingElement as Element).scrollTop +
+            window.innerHeight <
+          (document.scrollingElement as Element).scrollHeight
+      )
+    ) {
+      await this.page.evaluate(y => {
+        (document.scrollingElement as Element).scrollBy(0, y);
+      }, distance);
+      await this.sleep(delay);
+    }
+  }
+
   static async isDisabled(locator: string): Promise<boolean> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -164,6 +211,31 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  static async getWidth(locator: string): Promise<number | undefined> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      return elements[0].boundingBox().then(element => element?.width);
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  /**
+   * Get height of locator
+   * @param locator - A locator to query page for
+   * @returns The height of the element in pixels.
+   */
+  static async getHeight(locator: string): Promise<number | undefined> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      return elements[0].boundingBox().then(element => element?.height);
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
   private static async getElementHandles(
     locator: string
   ): Promise<ElementHandle<Node>[]> {
@@ -176,17 +248,13 @@ export default class AutomationSy extends AutomationSyConfig {
   private static async validateNthChild(
     locators: ElementHandle<Node>[]
   ): Promise<void> {
-    try {
-      if (locators.length === 0) {
-        throw new AutomationSyError('No locator found');
-      }
-      if (locators.length > 1) {
-        throw new AutomationSyError(
-          'Locator has more than 1 child, total: ' + locators.length
-        );
-      }
-    } catch (error) {
-      throw new AutomationSyError((error as IError).message);
+    if (locators.length === 0) {
+      throw new AutomationSyError('No locator found');
+    }
+    if (locators.length > 1) {
+      throw new AutomationSyError(
+        'Locator has more than 1 child, total: ' + locators.length
+      );
     }
   }
 }
