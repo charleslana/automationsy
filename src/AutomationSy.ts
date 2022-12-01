@@ -145,7 +145,43 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
-  static async autoScroll(distance = 100, delay = 100) {
+  static async longClick(locator: string, milliseconds: number): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await (elements[0] as ElementHandle<Element>).click({
+        delay: milliseconds,
+      });
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async select(locator: string, ...options: string[]): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await elements[0].select(...options);
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async selectByIndex(locator: string, index: number): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await elements[0].evaluate(
+        (element, index) =>
+          ((element as HTMLSelectElement).selectedIndex = index),
+        index
+      );
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async autoScroll(distance = 100, delay = 100): Promise<void> {
     while (
       await this.page.evaluate(
         () =>
@@ -171,6 +207,55 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  static async getByAttribute(
+    locator: string,
+    attribute: string
+  ): Promise<string | null> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      return await elements[0].evaluate(
+        (element, attribute) => (element as Element).getAttribute(attribute),
+        attribute
+      );
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async getAllByAttribute(
+    locator: string,
+    attribute: string
+  ): Promise<string[]> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      const attributes: string[] = [];
+      for (const element of elements) {
+        const attr = await element.evaluate(
+          (el, attribute) => (el as Element).getAttribute(attribute),
+          attribute
+        );
+        attributes.push(attr as string);
+      }
+      return attributes;
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async getText(locator: string): Promise<string | null> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      return await elements[0].evaluate(element => element.textContent);
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  /**
+   * @deprecated The method should not be used, new feature use getByAttribute()
+   */
   static async getValue(locator: string): Promise<string | null> {
     try {
       return await this.page.$eval(locator, element =>
@@ -181,6 +266,9 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * @deprecated The method should not be used, new feature use getByAttribute()
+   */
   static async getClass(locator: string): Promise<string | null> {
     try {
       return await this.page.$eval(locator, element =>

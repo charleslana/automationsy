@@ -22,6 +22,7 @@ import AutomationSy from '../src/AutomationSy';
   );
   await AutomationSy.goBack();
   await AutomationSy.doubleClick('#position');
-  await AutomationSy.autoScroll();
+  await AutomationSy.autoScroll(1000, 0);
+  await AutomationSy.longClick("(//button[@id='isDisabled'])[2]", 1000);
   await AutomationSy.dispose();
 })();

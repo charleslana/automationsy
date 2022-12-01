@@ -20,6 +20,15 @@ import AutomationSy from '../src/AutomationSy';
   console.log('isDisabled:', isDisabled);
   await AutomationSy.clear('#clearMe');
   await AutomationSy.fill('#clearMe', 'Fill');
+  console.log('text:', await AutomationSy.getText('.card-footer-item'));
+  console.log(
+    'href:',
+    await AutomationSy.getByAttribute('text=Watch tutorial', 'href')
+  );
+  console.log(
+    'all inputs:',
+    await AutomationSy.getAllByAttribute("//input[@class='input']", 'id')
+  );
   await AutomationSy.sleep(1000);
   await AutomationSy.dispose();
 })();
