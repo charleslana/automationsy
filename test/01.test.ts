@@ -10,10 +10,6 @@ import AutomationSy from '../src/AutomationSy';
   await AutomationSy.type("//input[@class='input is-focused']", 'Hello world');
   await AutomationSy.focus('#join');
   await AutomationSy.keyboard('Tab');
-  const getValue = await AutomationSy.getValue('#getMe');
-  console.log('getValue:', getValue);
-  const getClass = await AutomationSy.getClass('#getMe');
-  console.log('getClass:', getClass);
   const isDisabled = await AutomationSy.isDisabled(
     "(//label[text()='Confirm edit field is disabled']/following::input)[1]"
   );

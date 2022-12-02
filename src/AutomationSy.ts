@@ -28,7 +28,7 @@ export default class AutomationSy extends AutomationSyConfig {
       ignoreDefaultArgs: ['--disable-extensions'],
     });
     this.page = await this.browser.newPage();
-    this.page.setDefaultTimeout(0);
+    this.page.setDefaultTimeout(this.getDefaultTimeout());
     await (await this.browser.pages())[0].close();
     console.log('Launching the browser');
   }
@@ -157,7 +157,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
-  static async select(locator: string, ...options: string[]): Promise<void> {
+  static async selectByValue(
+    locator: string,
+    ...options: string[]
+  ): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
       await this.validateNthChild(elements);
@@ -176,6 +179,18 @@ export default class AutomationSy extends AutomationSyConfig {
           ((element as HTMLSelectElement).selectedIndex = index),
         index
       );
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async waitForLocator(locator: string): Promise<void> {
+    try {
+      if (locator.startsWith('/') || locator.includes('//')) {
+        await this.page.waitForXPath(locator);
+        return;
+      }
+      await this.page.waitForSelector(locator);
     } catch (error) {
       throw new AutomationSyError((error as IError).message);
     }
@@ -202,6 +217,18 @@ export default class AutomationSy extends AutomationSyConfig {
       const elements = await this.getElementHandles(locator);
       await this.validateNthChild(elements);
       return elements[0] !== null;
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async isChecked(locator: string): Promise<boolean> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      return await elements[0].evaluate(
+        element => (element as HTMLInputElement).checked
+      );
     } catch (error) {
       throw new AutomationSyError((error as IError).message);
     }
@@ -248,32 +275,6 @@ export default class AutomationSy extends AutomationSyConfig {
       const elements = await this.getElementHandles(locator);
       await this.validateNthChild(elements);
       return await elements[0].evaluate(element => element.textContent);
-    } catch (error) {
-      throw new AutomationSyError((error as IError).message);
-    }
-  }
-
-  /**
-   * @deprecated The method should not be used, new feature use getByAttribute()
-   */
-  static async getValue(locator: string): Promise<string | null> {
-    try {
-      return await this.page.$eval(locator, element =>
-        element.getAttribute('value')
-      );
-    } catch (error) {
-      throw new AutomationSyError((error as IError).message);
-    }
-  }
-
-  /**
-   * @deprecated The method should not be used, new feature use getByAttribute()
-   */
-  static async getClass(locator: string): Promise<string | null> {
-    try {
-      return await this.page.$eval(locator, element =>
-        element.getAttribute('class')
-      );
     } catch (error) {
       throw new AutomationSyError((error as IError).message);
     }

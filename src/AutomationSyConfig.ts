@@ -3,6 +3,7 @@ export default abstract class AutomationSyConfig {
   private static maximized = false;
   private static width = 800;
   private static height = 600;
+  private static defaultTimeout = 0;
 
   static setHeadless(headless: boolean): void {
     this.headless = headless;
@@ -15,6 +16,10 @@ export default abstract class AutomationSyConfig {
   static setWindowSize(width: number, height: number): void {
     this.width = width;
     this.height = height;
+  }
+
+  static setDefaultTimeout(milliseconds: number): void {
+    this.defaultTimeout = milliseconds;
   }
 
   static getHeadless(): boolean {
@@ -32,5 +37,9 @@ export default abstract class AutomationSyConfig {
     const w = this.width;
     const h = this.height;
     return { w, h };
+  }
+
+  static getDefaultTimeout(): number {
+    return this.defaultTimeout;
   }
 }
