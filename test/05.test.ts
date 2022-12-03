@@ -1,7 +1,8 @@
 import AutomationSy from '../src/AutomationSy';
 
 (async () => {
-  AutomationSy.setHeadless(true);
+  AutomationSy.setWaitUntil('domcontentloaded');
+  AutomationSy.setDefaultNavigationTimeout(5000);
   await AutomationSy.init();
   await AutomationSy.navigate('https://letcode.in/windows');
   await AutomationSy.click('#home');

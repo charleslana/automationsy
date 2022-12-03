@@ -29,11 +29,13 @@ export default class AutomationSy extends AutomationSyConfig {
     });
     this.page = await this.browser.newPage();
     this.page.setDefaultTimeout(this.getDefaultTimeout());
+    this.page.setDefaultNavigationTimeout(this.getDefaultNavigationTimeout());
     await (await this.browser.pages())[0].close();
     console.log('Launching the browser');
   }
 
   static async dispose(): Promise<void> {
+    console.log('Closing the browser');
     await this.browser.close();
   }
 
@@ -43,7 +45,7 @@ export default class AutomationSy extends AutomationSyConfig {
 
   static async navigate(url: string): Promise<void> {
     try {
-      await this.page.goto(url);
+      await this.page.goto(url, { waitUntil: this.getWaitUntil() });
     } catch (error) {
       throw new AutomationSyError((error as IError).message);
     }
