@@ -1,7 +1,13 @@
 import AutomationSyConfig from './AutomationSyConfig';
 import AutomationSyError from './AutomationSyError';
 import IError from './IError';
-import puppeteer, { Browser, ElementHandle, KeyInput, Page } from 'puppeteer';
+import puppeteer, {
+  BoundingBox,
+  Browser,
+  ElementHandle,
+  KeyInput,
+  Page,
+} from 'puppeteer';
 
 export default class AutomationSy extends AutomationSyConfig {
   private constructor() {
@@ -139,7 +145,7 @@ export default class AutomationSy extends AutomationSyConfig {
       const elements = await this.getElementHandles(locator);
       await this.validateNthChild(elements);
       await elements[0].evaluate(
-        (selector, text) => ((selector as HTMLInputElement).value = text),
+        (element, text) => ((element as HTMLInputElement).value = text),
         text
       );
     } catch (error) {
@@ -228,8 +234,70 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  static async dragAndDropByPosition(
+    locator: string,
+    positionX: number,
+    positionY: number
+  ): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      const boundingBox = (await elements[0].boundingBox()) as BoundingBox;
+      const bX = boundingBox.x + boundingBox.width / 2;
+      const bY = boundingBox.y + boundingBox.height / 2;
+      await this.page.mouse.move(bX, bY);
+      await this.page.mouse.down();
+      await this.page.mouse.move(bX + positionX, bY + positionY, { steps: 2 });
+      await this.page.mouse.up();
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async dragAndDropByTarget(
+    locator: string,
+    targetLocator: string
+  ): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      const targetElements = await this.getElementHandles(targetLocator);
+      await this.validateNthChild(targetElements);
+      const boundingBox = (await elements[0].boundingBox()) as BoundingBox;
+      const bX = boundingBox.x + boundingBox.width / 2;
+      const bY = boundingBox.y + boundingBox.height / 2;
+      const targetBoundingBox =
+        (await targetElements[0].boundingBox()) as BoundingBox;
+      const tBX = targetBoundingBox.x + targetBoundingBox.width / 2;
+      const tBY = targetBoundingBox.y + targetBoundingBox.height / 2;
+      await this.page.mouse.move(bX, bY);
+      await this.page.mouse.down();
+      await this.page.mouse.move(tBX, tBY);
+      await this.page.mouse.up();
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async scroll(distance: number): Promise<void> {
+    await this.page.evaluate(
+      distance => window.scrollBy(0, distance),
+      distance
+    );
+  }
+
   static async setHTML(html: string): Promise<void> {
     await this.page.setContent(html);
+  }
+
+  static async removeHTML(locator: string): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await elements[0].evaluate(element => (element as Element).remove());
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
   }
 
   static async autoScroll(distance = 100, delay = 100): Promise<void> {
