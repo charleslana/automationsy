@@ -228,6 +228,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  static async setHTML(html: string): Promise<void> {
+    await this.page.setContent(html);
+  }
+
   static async autoScroll(distance = 100, delay = 100): Promise<void> {
     while (
       await this.page.evaluate(
