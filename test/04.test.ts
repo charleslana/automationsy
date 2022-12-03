@@ -11,9 +11,4 @@ import AutomationSy from '../src/AutomationSy';
     await AutomationSy.isChecked("(//input[@type='checkbox'])[1]")
   );
   await AutomationSy.dispose();
-  console.log(isNaN(getText(5) as unknown as number));
 })();
-
-function getText<T>(text: T): T {
-  return text;
-}

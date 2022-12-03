@@ -196,6 +196,36 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  static async switchPage(index: number): Promise<void> {
+    await this.sleep(100);
+    const allPages = await this.browser.pages();
+    if (typeof allPages[index] === 'undefined') {
+      throw new AutomationSyError('Index not exist in page tab');
+    }
+    await allPages[index].bringToFront();
+    this.page = allPages[index];
+  }
+
+  static async quitPage(index: number): Promise<void> {
+    const allPages = await this.browser.pages();
+    if (typeof allPages[index] === 'undefined') {
+      throw new AutomationSyError('Index not exist in page tab');
+    }
+    await allPages[index].close();
+  }
+
+  static async waitForLocatorDisappear(locator: string): Promise<void> {
+    try {
+      if (locator.startsWith('/') || locator.includes('//')) {
+        await this.page.waitForXPath(locator, { hidden: true });
+        return;
+      }
+      await this.page.waitForSelector(locator, { hidden: true });
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
   static async autoScroll(distance = 100, delay = 100): Promise<void> {
     while (
       await this.page.evaluate(
@@ -232,6 +262,14 @@ export default class AutomationSy extends AutomationSyConfig {
     } catch (error) {
       throw new AutomationSyError((error as IError).message);
     }
+  }
+
+  static async getTitle(): Promise<string> {
+    return await this.page.title();
+  }
+
+  static getUrl(): string {
+    return this.page.url();
   }
 
   static async getByAttribute(
