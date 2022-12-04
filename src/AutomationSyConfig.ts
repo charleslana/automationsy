@@ -74,18 +74,35 @@ export default abstract class AutomationSyConfig {
     this.waitUntil = option;
   }
 
+  /**
+   * Set the maximum navigation time,
+   * if the navigation time does not occur it will generate a timed-out error exception
+   * @param milliseconds - set time in milliseconds
+   */
   static setDefaultNavigationTimeout(milliseconds: number): void {
     this.defaultNavigationTimeout = milliseconds;
   }
 
+  /**
+   * Get headless mode
+   * @returns the boolean value of headless mode
+   */
   static getHeadless(): boolean {
     return this.headless;
   }
 
+  /**
+   * Get maximized value
+   * @returns the maximized value of window
+   */
   static getMaximized(): boolean {
     return this.maximized;
   }
 
+  /**
+   * Get width and height of window
+   * @returns the height and width of the window
+   */
   static getWindowSize(): {
     w: number;
     h: number;
@@ -95,14 +112,26 @@ export default abstract class AutomationSyConfig {
     return { w, h };
   }
 
+  /**
+   * Get default timeout
+   * @returns the default timeout for each action
+   */
   static getDefaultTimeout(): number {
     return this.defaultTimeout;
   }
 
+  /**
+   * Get option wait until
+   * @returns option wait until
+   */
   static getWaitUntil(): PuppeteerLifeCycleEvent {
     return this.waitUntil;
   }
 
+  /**
+   * Get navigation default timeout
+   * @returns navigation default timeout
+   */
   static getDefaultNavigationTimeout(): number {
     return this.defaultNavigationTimeout;
   }
