@@ -13,6 +13,7 @@
   },
   "author": "Charles Lana",
   "license": "ISC",
+  "keywords": ["automation", "automationsy", "test", "test automation", "puppeteer"],
   "dependencies": {
     "puppeteer": "^19.3.0"
   },

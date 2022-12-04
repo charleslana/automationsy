@@ -1,6 +1,9 @@
 import AutomationSyConfig from './AutomationSyConfig';
 import AutomationSyError from './AutomationSyError';
+import fs from 'fs';
 import IError from './IError';
+import path from 'path';
+import process from 'process';
 import puppeteer, {
   BoundingBox,
   Browser,
@@ -295,6 +298,40 @@ export default class AutomationSy extends AutomationSyConfig {
       const elements = await this.getElementHandles(locator);
       await this.validateNthChild(elements);
       await elements[0].evaluate(element => (element as Element).remove());
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async screenshot(): Promise<void> {
+    try {
+      const dir = path.join(process.cwd(), 'screenshots');
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      const date = new Date();
+      const screenshotDir = `${date
+        .toLocaleString()
+        .replace(/\//g, '-')}:${date.getMilliseconds()}.png`;
+      const file = path.join(dir, screenshotDir);
+      await this.page.screenshot({ path: file });
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  static async pdf(): Promise<void> {
+    try {
+      const dir = path.join(process.cwd(), 'pdf');
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      const date = new Date();
+      const screenshotDir = `${date
+        .toLocaleString()
+        .replace(/\//g, '-')}:${date.getMilliseconds()}.pdf`;
+      const file = path.join(dir, screenshotDir);
+      await this.page.pdf({ path: file, format: 'A4' });
     } catch (error) {
       throw new AutomationSyError((error as IError).message);
     }
