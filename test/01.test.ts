@@ -2,7 +2,6 @@ import AutomationSy from '../src/AutomationSy';
 
 (async () => {
   const url = 'https://letcode.in/edit';
-  // AutomationSy.setMaximized(true);
   AutomationSy.setWindowSize(1024, 768);
   AutomationSy.setHeadless(false);
   await AutomationSy.init();

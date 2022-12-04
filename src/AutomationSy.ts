@@ -12,6 +12,10 @@ import puppeteer, {
   Page,
 } from 'puppeteer';
 
+/**
+ * Easy automation core to call perform actions from test scope
+ * Extends easy automation core settings {@link AutomationSyConfig}
+ */
 export default class AutomationSy extends AutomationSyConfig {
   private constructor() {
     super();
@@ -20,6 +24,9 @@ export default class AutomationSy extends AutomationSyConfig {
   private static page: Page;
   private static browser: Browser;
 
+  /**
+   * Before initializing the test, this method must be executed
+   */
   static async init(): Promise<void> {
     const args = ['--no-sandbox', '--incognito'];
     if (this.getMaximized()) {
@@ -43,6 +50,9 @@ export default class AutomationSy extends AutomationSyConfig {
     console.log('Launching the browser');
   }
 
+  /**
+   * Close browser and all recurring actions
+   */
   static async dispose(): Promise<void> {
     console.log('Closing the browser');
     await this.browser.close();
@@ -208,7 +218,7 @@ export default class AutomationSy extends AutomationSyConfig {
   }
 
   static async switchPage(index: number): Promise<void> {
-    await this.sleep(100);
+    await this.sleep(500);
     const allPages = await this.browser.pages();
     if (typeof allPages[index] === 'undefined') {
       throw new AutomationSyError('Index not exist in page tab');
