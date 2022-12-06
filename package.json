@@ -1,5 +1,5 @@
 {
-  "name": "automationsy3",
+  "name": "automationsy",
   "version": "1.0.0",
   "description": "Easy automated testing functions for beginners and advanced",
   "repository": "github:charleslana/automationsy",
@@ -16,7 +16,8 @@
   "engines": {
     "node": ">=14"
   },
-  "main": "src/AutomationSy",
+  "main": "./dist/AutomationSy.js",
+  "types": "./dist/AutomationSy.d.ts",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
