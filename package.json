@@ -16,8 +16,8 @@
   "engines": {
     "node": ">=14"
   },
-  "main": "./dist/AutomationSy.js",
-  "types": "./dist/AutomationSy.d.ts",
+  "main": "./dist/src/AutomationSy.js",
+  "types": "./dist/src/AutomationSy.d.ts",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
