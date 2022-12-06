@@ -23,7 +23,7 @@
     "build": "tsc",
     "start": "npm run build && node dist/test/01.test.js",
     "test": "npm run build && node dist/test/$npm_config_name.test.js",
-    "multiple": "npm run build && node dist/test/01.test.js && node dist/test/02.test.js"
+    "test:all": "npm run build && node dist/test/01.test.js && node dist/test/02.test.js && node dist/test/03.test.js && node dist/test/04.test.js && node dist/test/05.test.js && node dist/test/06.test.js && node dist/test/07.test.js && node dist/test/08.test.js && node dist/test/09.test.js"
   },
   "dependencies": {
     "puppeteer": "^19.3.0"

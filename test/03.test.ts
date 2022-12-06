@@ -6,7 +6,7 @@ import AutomationSy from '../src/AutomationSy';
   await AutomationSy.init();
   await AutomationSy.navigate('https://letcode.in/dropdowns');
   await AutomationSy.selectByValue('#fruits', '2');
-  await AutomationSy.waitForLocator('.notification2');
+  await AutomationSy.waitForLocator('.notification');
   await AutomationSy.selectByIndex('#lang', 4);
   await AutomationSy.selectByValue('#superheros', 'aq', 'ta');
   await AutomationSy.dispose();

@@ -347,6 +347,12 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Drag and drop an element to a position
+   * @param locator - set page locator
+   * @param positionX - x position of element
+   * @param positionY - y position of element
+   */
   static async dragAndDropByPosition(
     locator: string,
     positionX: number,
@@ -367,6 +373,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Drag and drop an element to a target
+   * @param locator - set page locator
+   * @param targetLocator - set page locator target
+   */
   static async dragAndDropByTarget(
     locator: string,
     targetLocator: string
@@ -392,6 +403,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Move the page scroll
+   * @param distance - set distance in pixels
+   */
   static async scroll(distance: number): Promise<void> {
     await this.page.evaluate(
       distance => window.scrollBy(0, distance),
@@ -399,10 +414,18 @@ export default class AutomationSy extends AutomationSyConfig {
     );
   }
 
+  /**
+   * Write HTML on the page
+   * @param html - set HTML elements
+   */
   static async setHTML(html: string): Promise<void> {
     await this.page.setContent(html);
   }
 
+  /**
+   * Remove HTML from page
+   * @param locator - set page locator
+   */
   static async removeHTML(locator: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -413,6 +436,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Screenshot of the test run
+   * - The images folder is screenshots in the root of the test run
+   */
   static async screenshot(): Promise<void> {
     try {
       const dir = path.join(process.cwd(), 'screenshots');
@@ -430,6 +457,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Capture all test page context in PDF
+   * - The capture results folder is pdf in the root of the test run
+   */
   static async pdf(): Promise<void> {
     try {
       const dir = path.join(process.cwd(), 'pdf');
@@ -447,6 +478,15 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Move page scroll vertically automatically, set distance and delay time for each distance
+   * @param distance - set distance in pixels
+   * @param delay - set time delay in milliseconds
+   * @example
+   * ```ts
+   * await AutomationSy.autoScroll(100, 0);
+   * ```
+   */
   static async autoScroll(distance = 100, delay = 100): Promise<void> {
     while (
       await this.page.evaluate(
@@ -463,6 +503,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get field enabled or disabled value
+   * @param locator - set page locator
+   * @returns value true or false
+   */
   static async isDisabled(locator: string): Promise<boolean> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -473,6 +518,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get field checked or unchecked value
+   * @param locator - set page locator
+   * @returns value true or false
+   */
   static async isChecked(locator: string): Promise<boolean> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -485,14 +535,28 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get page title
+   * @returns string
+   */
   static async getTitle(): Promise<string> {
     return await this.page.title();
   }
 
+  /**
+   * Get page url
+   * @returns string
+   */
   static getUrl(): string {
     return this.page.url();
   }
 
+  /**
+   * Get page element attributes
+   * @param locator - set page locator
+   * @param attribute - set element attribute
+   * @returns string or null
+   */
   static async getByAttribute(
     locator: string,
     attribute: string
@@ -509,6 +573,12 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get all page element attributes
+   * @param locator - set page locator
+   * @param attribute - set element attribute
+   * @returns list of string
+   */
   static async getAllByAttribute(
     locator: string,
     attribute: string
@@ -529,6 +599,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get text inside page element
+   * @param locator - set page locator
+   * @returns string or null
+   */
   static async getText(locator: string): Promise<string | null> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -539,6 +614,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get x position of page element
+   * @param locator - set page locator
+   * @returns number or undefined
+   */
   static async getPositionX(locator: string): Promise<number | undefined> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -549,6 +629,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get y position of page element
+   * @param locator - set page locator
+   * @returns number or undefined
+   */
   static async getPositionY(locator: string): Promise<number | undefined> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -559,6 +644,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Get width of page element
+   * @param locator - set page locator
+   * @returns number or undefined
+   */
   static async getWidth(locator: string): Promise<number | undefined> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -570,9 +660,9 @@ export default class AutomationSy extends AutomationSyConfig {
   }
 
   /**
-   * Get height of locator
-   * @param locator - A locator to query page for
-   * @returns The height of the element in pixels.
+   * Get height of page element
+   * @param locator - set page locator
+   * @returns number or undefined
    */
   static async getHeight(locator: string): Promise<number | undefined> {
     try {
@@ -584,6 +674,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Handle locator type on page when it is xpath or not
+   * @param locator - set page locator
+   * @returns list of handles elements
+   */
   private static async getElementHandles(
     locator: string
   ): Promise<ElementHandle<Node>[]> {
@@ -593,6 +688,10 @@ export default class AutomationSy extends AutomationSyConfig {
     return this.page.$$(locator);
   }
 
+  /**
+   * Validates that the element exists on the page and contains more than one child
+   * @param locators - set page locators
+   */
   private static async validateNthChild(
     locators: ElementHandle<Node>[]
   ): Promise<void> {
@@ -606,7 +705,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
-  private static isValidURL(url: string) {
+  /**
+   * Validates if the URL is valid
+   * @param url - set url
+   */
+  private static isValidURL(url: string): boolean {
     return /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/.test(url);
   }
 }

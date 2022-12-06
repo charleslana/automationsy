@@ -7,4 +7,5 @@ import AutomationSy from '../src/AutomationSy';
   );
   await AutomationSy.sleep(2000);
   await AutomationSy.click('button');
+  await AutomationSy.dispose();
 })();
