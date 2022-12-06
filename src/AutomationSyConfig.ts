@@ -14,8 +14,7 @@ export default abstract class AutomationSyConfig {
 
   /**
    * Set headless mode
-   * @param headless - by default it is false,
-   * when set to true the browser will not appear, it will run in headless mode
+   * @param headless - by default it is false, when set to true the browser will not appear, it will run in headless mode
    */
   static setHeadless(headless: boolean): void {
     this.headless = headless;
@@ -23,8 +22,7 @@ export default abstract class AutomationSyConfig {
 
   /**
    * Set browser with screen maximized
-   * @param maximized - by default it is false,
-   * when set to true the browser will open in screen maximized
+   * @param maximized - by default it is false, when set to true the browser will open in screen maximized
    */
   static setMaximized(maximized: boolean): void {
     this.maximized = maximized;
@@ -34,12 +32,12 @@ export default abstract class AutomationSyConfig {
    * Set browser screen size
    * @param width - set browser width in pixel
    * @param height - set browser height in pixel
-   * @example - Screen of an iPhone 4
-   *
+   * @example
+   * - Screen of an iPhone 4
    * ```ts
    * AutomationSy.setWindowSize(320, 480);
    * ```
-   * - LED monitor 27
+   * - Screen LED monitor 27
    * ```ts
    * AutomationSy.setWindowSize(1920, 1080);
    * ```

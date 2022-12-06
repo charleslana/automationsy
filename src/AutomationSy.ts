@@ -58,11 +58,22 @@ export default class AutomationSy extends AutomationSyConfig {
     await this.browser.close();
   }
 
+  /**
+   * Wait action for next action
+   * @param milliseconds - set time in milliseconds
+   */
   static async sleep(milliseconds: number): Promise<void> {
     await new Promise(_func => setTimeout(_func, milliseconds));
   }
 
+  /**
+   * Navigate to a page
+   * @param url - set url link, e.g. `https://`.
+   */
   static async navigate(url: string): Promise<void> {
+    if (!this.isValidURL(url)) {
+      throw new AutomationSyError('URL invalid');
+    }
     try {
       await this.page.goto(url, { waitUntil: this.getWaitUntil() });
     } catch (error) {
@@ -70,6 +81,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Type in fields
+   * @param locator - set page locator
+   * @param text - set text to type
+   */
   static async type(locator: string, text: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -80,6 +96,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Keep focus on page element
+   * @param locator - set page locator
+   */
   static async focus(locator: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -90,6 +110,14 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Press a key on the keyboard
+   * @param key - set keyboard keys only
+   * @example
+   * ```ts
+   *  await AutomationSy.keyboard('Enter');
+   * ```
+   */
   static async keyboard(key: KeyInput): Promise<void> {
     try {
       await this.page.keyboard.press(key);
@@ -98,6 +126,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Clear the field
+   * @param locator - set page locator
+   */
   static async clear(locator: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -109,6 +141,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Click on page element
+   * @param locator - set page locator
+   */
   static async click(locator: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -119,6 +155,9 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Go back one page
+   */
   static async goBack(): Promise<void> {
     try {
       await this.page.goBack();
@@ -127,6 +166,9 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Go to a next page
+   */
   static async goForward(): Promise<void> {
     try {
       await this.page.goForward();
@@ -135,6 +177,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Click on page element position
+   * @param x - x position of element
+   * @param y - y position of element
+   */
   static async clickPosition(x: number, y: number): Promise<void> {
     try {
       await this.page.mouse.click(x, y, { button: 'left' });
@@ -143,6 +190,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Double click on page element
+   * @param locator - set page locator
+   */
   static async doubleClick(locator: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -153,6 +204,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Difference between typing, and filling information directly into the field value
+   * @param locator - set page locator
+   * @param text - set text to type
+   */
   static async fill(locator: string, text: string): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -166,6 +222,11 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Long click on page element
+   * @param locator - set page locator
+   * @param milliseconds - set time in milliseconds
+   */
   static async longClick(locator: string, milliseconds: number): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -178,6 +239,20 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Select a dropdown by option value on page element
+   * @param locator - set page locator
+   * @param options - set a list of values, you can send only one or many of the select options
+   * @example
+   * * one
+   * ```ts
+   * await AutomationSy.selectByValue('locator', 'only');
+   * ```
+   * * many
+   * ```ts
+   * await AutomationSy.selectByValue('locator', 'first', 'second');
+   * ```
+   */
   static async selectByValue(
     locator: string,
     ...options: string[]
@@ -191,6 +266,15 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Select a dropdown by option index on page element
+   * @param locator - set page locator
+   * @param index - set select option index
+   * @example
+   * ```ts
+   * await AutomationSy.selectByIndex('locator', 0);
+   * ```
+   */
   static async selectByIndex(locator: string, index: number): Promise<void> {
     try {
       const elements = await this.getElementHandles(locator);
@@ -205,6 +289,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Wait for a locator to appear on the page
+   * @param locator - set page locator
+   */
   static async waitForLocator(locator: string): Promise<void> {
     try {
       if (locator.startsWith('/') || locator.includes('//')) {
@@ -217,6 +305,10 @@ export default class AutomationSy extends AutomationSyConfig {
     }
   }
 
+  /**
+   * Switch tabs in browser
+   * @param index - set browser tab index
+   */
   static async switchPage(index: number): Promise<void> {
     await this.sleep(500);
     const allPages = await this.browser.pages();
@@ -227,6 +319,10 @@ export default class AutomationSy extends AutomationSyConfig {
     this.page = allPages[index];
   }
 
+  /**
+   * Exit browser tab
+   * @param index - set browser tab index
+   */
   static async quitPage(index: number): Promise<void> {
     const allPages = await this.browser.pages();
     if (typeof allPages[index] === 'undefined') {
@@ -235,6 +331,10 @@ export default class AutomationSy extends AutomationSyConfig {
     await allPages[index].close();
   }
 
+  /**
+   * Wait for the page locator to disappear
+   * @param locator - set page locator
+   */
   static async waitForLocatorDisappear(locator: string): Promise<void> {
     try {
       if (locator.startsWith('/') || locator.includes('//')) {
@@ -504,5 +604,9 @@ export default class AutomationSy extends AutomationSyConfig {
         'Locator has more than 1 child, total: ' + locators.length
       );
     }
+  }
+
+  private static isValidURL(url: string) {
+    return /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/.test(url);
   }
 }

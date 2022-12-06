@@ -1,8 +1,22 @@
 {
   "name": "automationsy",
   "version": "1.0.0",
-  "description": "test automation",
-  "main": "index.js",
+  "description": "Easy automated testing functions for beginners and advanced",
+  "repository": "github:charleslana/automationsy",
+  "homepage": "",
+  "author": "Charles Lana",
+  "license": "ISC",
+  "keywords": [
+    "automation",
+    "automationsy",
+    "test",
+    "test automation",
+    "puppeteer"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "main": "src/AutomationSy",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
@@ -11,9 +25,6 @@
     "test": "npm run build && node dist/test/$npm_config_name.test.js",
     "multiple": "npm run build && node dist/test/01.test.js && node dist/test/02.test.js"
   },
-  "author": "Charles Lana",
-  "license": "ISC",
-  "keywords": ["automation", "automationsy", "test", "test automation", "puppeteer"],
   "dependencies": {
     "puppeteer": "^19.3.0"
   },
