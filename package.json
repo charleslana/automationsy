@@ -16,7 +16,6 @@
   "engines": {
     "node": ">=14"
   },
-  "main": "src/AutomationSy",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
