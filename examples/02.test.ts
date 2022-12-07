@@ -1,4 +1,4 @@
-import AutomationSy from '../src/AutomationSy';
+import { AutomationSy } from '../src/AutomationSy';
 
 (async () => {
   await AutomationSy.init();

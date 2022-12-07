@@ -1,0 +1,1 @@
+export { AutomationSy } from './AutomationSy';

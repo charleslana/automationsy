@@ -1,6 +1,9 @@
-node_modules
-dist
 .vscode
+
+node_modules
 package-lock.json
+dist
+dist_test
+
 screenshots
 pdf

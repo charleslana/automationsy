@@ -16,7 +16,7 @@ import puppeteer, {
  * Easy automation core to call perform actions from test scope
  * Extends easy automation core settings {@link AutomationSyConfig}
  */
-export default class AutomationSy extends AutomationSyConfig {
+export class AutomationSy extends AutomationSyConfig {
   private constructor() {
     super();
   }

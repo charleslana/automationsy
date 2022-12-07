@@ -44,7 +44,8 @@ You can access the documentation site [here](linkdoc)
 ### 📝 How to create my tests?
 
 ```javascript
-import AutomationSy from 'automationsy';
+import { AutomationSy } from 'automationsy';
+//const { AutomationSy } = require('automationsy');
 
 (async () => {
   await AutomationSy.init();

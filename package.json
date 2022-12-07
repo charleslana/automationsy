@@ -1,5 +1,5 @@
 {
-  "name": "testautomacao4",
+  "name": "automationsy",
   "version": "1.0.0",
   "description": "Easy automated testing functions for beginners and advanced",
   "repository": "github:charleslana/automationsy",
@@ -13,28 +13,28 @@
     "test automation",
     "puppeteer"
   ],
-  "main": "dist/AutomationSy.js",
-  "types": "dist/AutomationSy.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "/dist"
   ],
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
-    "build": "tsc",
-    "start": "npm run build && node dist/index.js",
-    "test": "node dist/examples/$npm_config_name.test.js",
+    "build": "rm -rf dist && tsc",
+    "build:test": "rm -rf dist_test && tsc --build tsconfig.test.json",
+    "test": "node dist_test/examples/$npm_config_name.test.js",
     "test:all": "npm run test --name=01 && npm run test --name=02 && npm run test --name=03 && npm run test --name=04 && npm run test --name=05 && npm run test --name=06 && npm run test --name=07 && npm run test --name=08 && npm run test --name=09"
   },
   "dependencies": {
-    "puppeteer": "^19.3.0",
-    "typescript": "^4.9.3"
+    "puppeteer": "^19.3.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1"
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^4.9.3"
   }
 }

@@ -48,7 +48,8 @@ Você pode acessar o site da documentação por [aqui](linkdoc)
 Abaixo é um exemplo de como navegar em uma página
 
 ```javascript
-import AutomationSy from 'automationsy';
+import { AutomationSy } from 'automationsy';
+//const { AutomationSy } = require('automationsy');
 
 (async () => {
   await AutomationSy.init();
