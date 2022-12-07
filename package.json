@@ -1,5 +1,5 @@
 {
-  "name": "testautomacao2",
+  "name": "testautomacao4",
   "version": "1.0.0",
   "description": "Easy automated testing functions for beginners and advanced",
   "repository": "github:charleslana/automationsy",
@@ -13,8 +13,8 @@
     "test automation",
     "puppeteer"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/AutomationSy.js",
+  "types": "dist/AutomationSy.d.ts",
   "files": [
     "/dist"
   ],
