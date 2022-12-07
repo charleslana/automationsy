@@ -1,5 +1,5 @@
 {
-  "name": "automationsy",
+  "name": "test",
   "version": "1.0.0",
   "description": "Easy automated testing functions for beginners and advanced",
   "repository": "github:charleslana/automationsy",
@@ -13,20 +13,22 @@
     "test automation",
     "puppeteer"
   ],
-  "engines": {
-    "node": ">=14"
-  },
-  "main": "src/AutomationSy",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "build": "tsc",
-    "start": "npm run build && node dist/test/01.test.js",
-    "test": "npm run build && node dist/test/$npm_config_name.test.js",
-    "test:all": "npm run build && node dist/test/01.test.js && node dist/test/02.test.js && node dist/test/03.test.js && node dist/test/04.test.js && node dist/test/05.test.js && node dist/test/06.test.js && node dist/test/07.test.js && node dist/test/08.test.js && node dist/test/09.test.js"
+    "start": "npm run build && node dist/index.js",
+    "test": "node dist/examples/$npm_config_name.test.js",
+    "test:all": "npm run test --name=01 && npm run test --name=02 && npm run test --name=03 && npm run test --name=04 && npm run test --name=05 && npm run test --name=06 && npm run test --name=07 && npm run test --name=08 && npm run test --name=09"
   },
   "dependencies": {
-    "puppeteer": "^19.3.0"
+    "puppeteer": "^19.3.0",
+    "typescript": "^4.9.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.44.0",

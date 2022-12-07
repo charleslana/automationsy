@@ -1,11 +1,10 @@
 import AutomationSy from '../src/AutomationSy';
 
 (async () => {
-  const url = 'https://letcode.in/edit';
   AutomationSy.setWindowSize(1024, 768);
   AutomationSy.setHeadless(false);
   await AutomationSy.init();
-  await AutomationSy.navigate(url);
+  await AutomationSy.navigate('https://letcode.in/edit');
   await AutomationSy.type("//input[@class='input is-focused']", 'Hello world');
   await AutomationSy.focus('#join');
   await AutomationSy.keyboard('Tab');
