@@ -2,7 +2,10 @@
   "name": "automationsy",
   "version": "1.0.1",
   "description": "Easy automated testing functions for beginners and advanced",
-  "repository": "github:charleslana/automationsy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charleslana/automationsy.git"
+  },
   "homepage": "",
   "author": "Charles Lana",
   "license": "ISC",
