@@ -44,8 +44,7 @@ You can access the documentation site [here](linkdoc)
 ### 📝 How to create my tests?
 
 ```javascript
-import { AutomationSy } from 'automationsy';
-//const { AutomationSy } = require('automationsy');
+const { AutomationSy } = require('automationsy');
 
 (async () => {
   await AutomationSy.init();
@@ -67,7 +66,7 @@ node test.js
 _Typescript_
 
 ```bash
-npm run build && node build/test.js
+tsc && node build/test.js
 ```
 
 <br>

@@ -48,8 +48,7 @@ Você pode acessar o site da documentação por [aqui](linkdoc)
 Abaixo é um exemplo de como navegar em uma página
 
 ```javascript
-import { AutomationSy } from 'automationsy';
-//const { AutomationSy } = require('automationsy');
+const { AutomationSy } = require('automationsy');
 
 (async () => {
   await AutomationSy.init();
@@ -71,7 +70,7 @@ node test.js
 _Typescript_
 
 ```bash
-npm run build && node build/test.js
+tsc && node build/test.js
 ```
 
 <br>
