@@ -1,9 +1,9 @@
 {
   "name": "automationsy",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Easy automated testing functions for beginners and advanced",
   "repository": "github:charleslana/automationsy",
-  "homepage": "",
+  "homepage": "https://automationsy.netlify.app/",
   "author": "Charles Lana",
   "license": "ISC",
   "keywords": [
