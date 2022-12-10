@@ -39,7 +39,7 @@ npm i
 
 ## 📄 Documentação/API detalhada
 
-Você pode acessar o site da documentação por [aqui](linkdoc)
+Você pode acessar o site da documentação por [aqui](https://automationsy.netlify.app/docs.html#start)
 
 <br>
 
@@ -96,7 +96,7 @@ Por favor, siga o [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) desse projeto.
 
 ## 🎥 Demonstração
 
-Acesse o vídeo da demonstração e uso [YouTube](linkyoutube)
+Acesse o vídeo da demonstração e uso [YouTube](https://www.youtube.com/watch?v=rnipWaD5LEU)
 
 <br>
 
