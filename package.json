@@ -1,8 +1,14 @@
 {
   "name": "automationsy",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Easy automated testing functions for beginners and advanced",
-  "repository": "github:charleslana/automationsy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charleslana/automationsy"
+  },
+  "engines": {
+    "node": ">=14"
+  },
   "homepage": "https://automationsy.netlify.app/",
   "author": "Charles Lana",
   "license": "ISC",
@@ -23,8 +29,9 @@
     "lint-fix": "eslint . --ext .ts --fix",
     "build": "rm -rf dist && tsc",
     "build:test": "rm -rf dist_test && tsc --build tsconfig.test.json",
-    "test": "node dist_test/examples/$npm_config_name.test.js",
-    "test:all": "npm run test --name=01 && npm run test --name=02 && npm run test --name=03 && npm run test --name=04 && npm run test --name=05 && npm run test --name=06 && npm run test --name=07 && npm run test --name=08 && npm run test --name=09"
+    "test:conf": "node dist_test/examples/$npm_config_name.test.js",
+    "test": "npm run build:test && npm run test:conf",
+    "test:all": "npm run build:test && npm run test:conf --name=01 && npm run test:conf --name=02 && npm run test:conf --name=03 && npm run test:conf --name=04 && npm run test:conf --name=05 && npm run test:conf --name=06 && npm run test:conf --name=07 && npm run test:conf --name=08 && npm run test:conf --name=09 && npm run test:conf --name=10"
   },
   "dependencies": {
     "puppeteer": "^19.3.0"

@@ -675,6 +675,33 @@ export class AutomationSy extends AutomationSyConfig {
   }
 
   /**
+   * Hover over the element
+   * @param locator - set page locator
+   */
+  static async hover(locator: string): Promise<void> {
+    try {
+      const elements = await this.getElementHandles(locator);
+      await this.validateNthChild(elements);
+      await (elements[0] as ElementHandle<Element>).hover();
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  /**
+   * Get element is visible or not
+   * @param locator - set page locator
+   * @returns value true or false
+   */
+  static async isVisible(locator: string): Promise<boolean> {
+    try {
+      return (await this.getWidth(locator)) != undefined;
+    } catch (error) {
+      throw new AutomationSyError((error as IError).message);
+    }
+  }
+
+  /**
    * Handle locator type on page when it is xpath or not
    * @param locator - set page locator
    * @returns list of handles elements
