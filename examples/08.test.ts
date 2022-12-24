@@ -1,8 +1,9 @@
-import { AutomationSy } from '../src/AutomationSy';
+import { Action } from '../src/';
 
 (async () => {
-  await AutomationSy.init();
-  await AutomationSy.navigate('https://letcode.in/draggable');
-  await AutomationSy.dragAndDropByPosition('#header', 100, 20);
-  await AutomationSy.dispose();
+  await Action.navigate('https://letcode.in/draggable');
+  await Action.screenshot();
+  await Action.dragAndDropByPosition('#header', 100, 20);
+  await Action.screenshot();
+  await Action.dispose();
 })();

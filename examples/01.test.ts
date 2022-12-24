@@ -1,28 +1,27 @@
-import { AutomationSy } from '../src/AutomationSy';
+import { Action, Config, Resource } from '../src/';
 
 (async () => {
-  AutomationSy.setWindowSize(1024, 768);
-  AutomationSy.setHeadless(false);
-  await AutomationSy.init();
-  await AutomationSy.navigate('https://letcode.in/edit');
-  await AutomationSy.type("//input[@class='input is-focused']", 'Hello world');
-  await AutomationSy.focus('#join');
-  await AutomationSy.keyboard('Tab');
-  const isDisabled = await AutomationSy.isDisabled(
+  Config.setWindowSize(1024, 768);
+  Config.setHeadless(false);
+  await Action.navigate('https://letcode.in/edit');
+  await Action.type("//input[@class='input is-focused']", 'Hello world');
+  await Action.focus('#join');
+  await Action.keyboard('Tab');
+  const isDisabled = await Resource.isDisabled(
     "(//label[text()='Confirm edit field is disabled']/following::input)[1]"
   );
   console.log('isDisabled:', isDisabled);
-  await AutomationSy.clear('#clearMe');
-  await AutomationSy.fill('#clearMe', 'Fill');
-  console.log('text:', await AutomationSy.getText('.card-footer-item'));
+  await Action.clear('#clearMe');
+  await Action.fill('#clearMe', 'Fill');
+  console.log('text:', await Resource.getText('.card-footer-item'));
   console.log(
     'href:',
-    await AutomationSy.getByAttribute('text=Watch tutorial', 'href')
+    await Resource.getByAttribute('text=Watch tutorial', 'href')
   );
   console.log(
     'all inputs:',
-    await AutomationSy.getAllByAttribute("//input[@class='input']", 'id')
+    await Resource.getAllByAttribute("//input[@class='input']", 'id')
   );
-  await AutomationSy.sleep(1000);
-  await AutomationSy.dispose();
+  await Action.sleep(1000);
+  await Action.dispose();
 })();

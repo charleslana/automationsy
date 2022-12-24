@@ -1,11 +1,10 @@
-import { AutomationSy } from '../src/AutomationSy';
+import { Action } from '../src/';
 
 (async () => {
-  await AutomationSy.init();
-  await AutomationSy.setHTML(
+  await Action.setHTML(
     '<h1>Hello world</h1><br><button onclick=window.close();>Close browser</button>'
   );
-  await AutomationSy.sleep(2000);
-  await AutomationSy.click('button');
-  await AutomationSy.dispose();
+  await Action.sleep(2000);
+  await Action.click('button');
+  await Action.dispose();
 })();

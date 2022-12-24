@@ -1,15 +1,14 @@
-import { AutomationSy } from '../src/AutomationSy';
+import { Action, Config } from '../src/';
 
 (async () => {
-  AutomationSy.setDefaultTimeout(5000);
-  await AutomationSy.init();
-  await AutomationSy.navigate('https://letcode.in/elements');
-  await AutomationSy.type('input[name="username"]', 'charleslana');
-  await AutomationSy.click('#search');
-  await AutomationSy.waitForLocator("//span[text()='Public Repos']");
-  await AutomationSy.clear('input[name="username"]');
-  await AutomationSy.click('#search');
-  await AutomationSy.waitForLocatorDisappear("//span[text()='Public Repos']");
-  await AutomationSy.waitForLocatorDisappear('figure');
-  await AutomationSy.dispose();
+  Config.setDefaultTimeout(5000);
+  await Action.navigate('https://letcode.in/elements');
+  await Action.type('input[name="username"]', 'charleslana');
+  await Action.click('#search');
+  await Action.waitForLocator("//span[text()='Public Repos']");
+  await Action.clear('input[name="username"]');
+  await Action.click('#search');
+  await Action.waitForLocatorDisappear("//span[text()='Public Repos']");
+  await Action.waitForLocatorDisappear('figure');
+  await Action.dispose();
 })();

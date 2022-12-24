@@ -1,9 +1,6 @@
 import { PuppeteerLifeCycleEvent } from 'puppeteer';
 
-/**
- * Test customization settings
- */
-export default abstract class AutomationSyConfig {
+export class Config {
   private static headless = false;
   private static maximized = false;
   private static width = 800;
@@ -16,7 +13,7 @@ export default abstract class AutomationSyConfig {
    * Set headless mode
    * @param headless - by default it is false, when set to true the browser will not appear, it will run in headless mode
    */
-  static setHeadless(headless: boolean): void {
+  public static setHeadless(headless: boolean): void {
     this.headless = headless;
   }
 
@@ -24,7 +21,7 @@ export default abstract class AutomationSyConfig {
    * Set browser with screen maximized
    * @param maximized - by default it is false, when set to true the browser will open in screen maximized
    */
-  static setMaximized(maximized: boolean): void {
+  public static setMaximized(maximized: boolean): void {
     this.maximized = maximized;
   }
 
@@ -42,7 +39,7 @@ export default abstract class AutomationSyConfig {
    * AutomationSy.setWindowSize(1920, 1080);
    * ```
    */
-  static setWindowSize(width: number, height: number): void {
+  public static setWindowSize(width: number, height: number): void {
     this.width = width;
     this.height = height;
   }
@@ -52,7 +49,7 @@ export default abstract class AutomationSyConfig {
    * if the action time does not occur it will generate a timed-out error exception
    * @param milliseconds - set time in milliseconds
    */
-  static setDefaultTimeout(milliseconds: number): void {
+  public static setDefaultTimeout(milliseconds: number): void {
     this.defaultTimeout = milliseconds;
   }
 
@@ -68,7 +65,7 @@ export default abstract class AutomationSyConfig {
    * * networkidle2 - considers browsing terminated when
    * there are no more than 2 network connections for at least 500ms
    */
-  static setWaitUntil(option: PuppeteerLifeCycleEvent): void {
+  public static setWaitUntil(option: PuppeteerLifeCycleEvent): void {
     this.waitUntil = option;
   }
 
@@ -77,7 +74,7 @@ export default abstract class AutomationSyConfig {
    * if the navigation time does not occur it will generate a timed-out error exception
    * @param milliseconds - set time in milliseconds
    */
-  static setDefaultNavigationTimeout(milliseconds: number): void {
+  public static setDefaultNavigationTimeout(milliseconds: number): void {
     this.defaultNavigationTimeout = milliseconds;
   }
 
@@ -85,7 +82,7 @@ export default abstract class AutomationSyConfig {
    * Get headless mode
    * @returns the boolean value of headless mode
    */
-  static getHeadless(): boolean {
+  protected static getHeadless(): boolean {
     return this.headless;
   }
 
@@ -93,7 +90,7 @@ export default abstract class AutomationSyConfig {
    * Get maximized value
    * @returns the maximized value of window
    */
-  static getMaximized(): boolean {
+  protected static getMaximized(): boolean {
     return this.maximized;
   }
 
@@ -101,7 +98,7 @@ export default abstract class AutomationSyConfig {
    * Get width and height of window
    * @returns the height and width of the window
    */
-  static getWindowSize(): {
+  protected static getWindowSize(): {
     w: number;
     h: number;
   } {
@@ -114,7 +111,7 @@ export default abstract class AutomationSyConfig {
    * Get default timeout
    * @returns the default timeout for each action
    */
-  static getDefaultTimeout(): number {
+  protected static getDefaultTimeout(): number {
     return this.defaultTimeout;
   }
 
@@ -122,7 +119,7 @@ export default abstract class AutomationSyConfig {
    * Get option wait until
    * @returns option wait until
    */
-  static getWaitUntil(): PuppeteerLifeCycleEvent {
+  protected static getWaitUntil(): PuppeteerLifeCycleEvent {
     return this.waitUntil;
   }
 
@@ -130,7 +127,7 @@ export default abstract class AutomationSyConfig {
    * Get navigation default timeout
    * @returns navigation default timeout
    */
-  static getDefaultNavigationTimeout(): number {
+  protected static getDefaultNavigationTimeout(): number {
     return this.defaultNavigationTimeout;
   }
 }

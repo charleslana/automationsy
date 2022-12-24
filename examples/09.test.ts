@@ -1,19 +1,16 @@
-import { AutomationSy } from '../src/AutomationSy';
+import { Action, Resource } from '../src/';
 
 (async () => {
-  await AutomationSy.init();
-  await AutomationSy.navigate('https://letcode.in/dropable');
-  await AutomationSy.pdf();
-  await AutomationSy.screenshot();
-  await AutomationSy.dragAndDropByTarget('#draggable', '#droppable');
-  await AutomationSy.scroll(350);
-  await AutomationSy.screenshot();
-  await AutomationSy.sleep(1000);
-  await AutomationSy.scroll(
-    (await AutomationSy.getPositionY('text=TODO')) as number
-  );
-  await AutomationSy.removeHTML('nav');
-  await AutomationSy.screenshot();
-  await AutomationSy.pdf();
-  await AutomationSy.dispose();
+  await Action.navigate('https://letcode.in/dropable');
+  await Action.pdf();
+  await Action.screenshot();
+  await Action.dragAndDropByTarget('#draggable', '#droppable');
+  await Action.scroll(350);
+  await Action.screenshot();
+  await Action.sleep(1000);
+  await Action.scroll((await Resource.getPositionY('text=TODO')) as number);
+  await Action.removeHTML('nav');
+  await Action.screenshot();
+  await Action.pdf();
+  await Action.dispose();
 })();
