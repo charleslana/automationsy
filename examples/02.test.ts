@@ -20,5 +20,5 @@ import { Action, Resource } from '../src/';
   await Action.doubleClick('#position');
   await Action.autoScroll(1000, 0);
   await Action.longClick("(//button[@id='isDisabled'])[2]", 1000);
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

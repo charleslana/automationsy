@@ -8,5 +8,5 @@ import { Action, Config } from '../src/';
   await Action.waitForLocator('.notification');
   await Action.selectByIndex('#lang', 4);
   await Action.selectByValue('#superheros', 'aq', 'ta');
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

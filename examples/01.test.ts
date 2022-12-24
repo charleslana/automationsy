@@ -23,5 +23,5 @@ import { Action, Config, Resource } from '../src/';
     await Resource.getAllByAttribute("//input[@class='input']", 'id')
   );
   await Action.sleep(1000);
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

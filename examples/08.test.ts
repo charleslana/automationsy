@@ -5,5 +5,5 @@ import { Action } from '../src/';
   await Action.screenshot();
   await Action.dragAndDropByPosition('#header', 100, 20);
   await Action.screenshot();
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

@@ -11,5 +11,5 @@ import { Action, Resource } from '../src/';
     'isVisible after:',
     await Resource.isVisible("(//div[@class='figcaption'])[1]")
   );
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

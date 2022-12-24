@@ -9,5 +9,5 @@ import { Action, Config, Resource } from '../src/';
     'checkbox',
     await Resource.isChecked("(//input[@type='checkbox'])[1]")
   );
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

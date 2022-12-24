@@ -10,5 +10,5 @@ import { Action, Config } from '../src/';
   await Action.click('#search');
   await Action.waitForLocatorDisappear("//span[text()='Public Repos']");
   await Action.waitForLocatorDisappear('figure');
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

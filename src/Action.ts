@@ -12,7 +12,8 @@ export class Action extends Config {
   /**
    * Close browser and all recurring actions
    */
-  static async dispose(): Promise<void> {
+  static async closeBrowser(): Promise<void> {
+    await Core.init();
     await Singleton.getBrowser().close();
   }
 
@@ -21,6 +22,7 @@ export class Action extends Config {
    * @param milliseconds - set time in milliseconds
    */
   static async sleep(milliseconds: number): Promise<void> {
+    await Core.init();
     await new Promise(_func => setTimeout(_func, milliseconds));
   }
 

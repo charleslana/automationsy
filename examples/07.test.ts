@@ -6,5 +6,5 @@ import { Action } from '../src/';
   );
   await Action.sleep(2000);
   await Action.click('button');
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

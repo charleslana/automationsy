@@ -16,5 +16,5 @@ import { Action, Config, Resource } from '../src/';
   console.log('url:', await Resource.getUrl());
   console.log('title:', await Resource.getTitle());
   await Action.quitPage(1);
-  await Action.dispose();
+  await Action.closeBrowser();
 })();

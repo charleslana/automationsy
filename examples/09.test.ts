@@ -12,5 +12,5 @@ import { Action, Resource } from '../src/';
   await Action.removeHTML('nav');
   await Action.screenshot();
   await Action.pdf();
-  await Action.dispose();
+  await Action.closeBrowser();
 })();
