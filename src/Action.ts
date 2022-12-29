@@ -15,6 +15,9 @@ export class Action extends Config {
   static async closeBrowser(): Promise<void> {
     await Core.init();
     await Singleton.getBrowser().close();
+    Singleton.setBrowser(null);
+    Singleton.setPage(null);
+    Core.setIsInit(false);
   }
 
   /**

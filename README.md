@@ -37,19 +37,20 @@ npm i
 
 ## 📄 Detailed documentation/API
 
-You can access the documentation site [here](https://automationsy.netlify.app/docs.html#start)
+You can access the documentation site [here](https://automationsy.netlify.app/docs-v2.html#start)
 
 <br>
 
 ### 📝 How to create my tests?
 
 ```javascript
-const { AutomationSy } = require('automationsy');
+const { Action, Config, Resource } = require('automationsy');
 
 (async () => {
-  await AutomationSy.init();
-  await AutomationSy.navigate('https://github.com/charleslana');
-  await AutomationSy.dispose();
+  Config.setHeadless(true);
+  await Action.navigate('https://github.com/charleslana');
+  await Resource.getText('.vcard-fullname');
+  await Action.closeBrowser();
 })();
 ```
 

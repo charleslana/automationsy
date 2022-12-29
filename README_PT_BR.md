@@ -39,7 +39,7 @@ npm i
 
 ## 📄 Documentação/API detalhada
 
-Você pode acessar o site da documentação por [aqui](https://automationsy.netlify.app/docs.html#start)
+Você pode acessar o site da documentação por [aqui](https://automationsy.netlify.app/docs-v2.html#start)
 
 <br>
 
@@ -48,12 +48,13 @@ Você pode acessar o site da documentação por [aqui](https://automationsy.netl
 Abaixo é um exemplo de como navegar em uma página
 
 ```javascript
-const { AutomationSy } = require('automationsy');
+const { Action, Config, Resource } = require('automationsy');
 
 (async () => {
-  await AutomationSy.init();
-  await AutomationSy.navigate('https://github.com/charleslana');
-  await AutomationSy.dispose();
+  Config.setHeadless(true);
+  await Action.navigate('https://github.com/charleslana');
+  await Resource.getText('.vcard-fullname');
+  await Action.closeBrowser();
 })();
 ```
 

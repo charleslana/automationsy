@@ -24,4 +24,8 @@ import { Action, Config, Resource } from '../src/';
   );
   await Action.sleep(1000);
   await Action.closeBrowser();
+  Config.setWaitUntil('domcontentloaded');
+  await Action.navigate('https://github.com/charleslana');
+  console.log(await Resource.getText('.vcard-fullname'));
+  await Action.closeBrowser();
 })();

@@ -34,4 +34,11 @@ export default abstract class Core extends Config {
       this.isInit = true;
     }
   }
+
+  /**
+   * @internal
+   */
+  public static setIsInit(isInit: boolean) {
+    this.isInit = isInit;
+  }
 }

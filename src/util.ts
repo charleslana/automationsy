@@ -4,6 +4,7 @@ import { ElementHandle } from 'puppeteer';
 
 /**
  * Handle locator type on page when it is xpath or not
+ * @function getElementHandles
  * @param locator - set page locator
  * @returns list of handles elements
  */
@@ -18,6 +19,7 @@ export async function getElementHandles(
 
 /**
  * Validates that the element exists on the page and contains more than one child
+ * @function validateNthChild
  * @param locators - set page locators
  */
 export async function validateNthChild(
@@ -35,6 +37,7 @@ export async function validateNthChild(
 
 /**
  * Validates if the URL is valid
+ * @function isValidURL
  * @param url - set url
  */
 export function isValidURL(url: string): boolean {
